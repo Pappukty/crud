@@ -1,33 +1,29 @@
+
+
 <?php
-//first step 
-// connection in local host and name and pass values
-$connection=mysqli_connect("localhost","root","");
-$db = mysqli_select_db($connection,"crud");
+include('config.php');
 
-if(isset($_POST['submit']))
-{
-  $name=$_POST('name');
-$number=$_POST('number');
-$address=$_POST('address');
-$email=$_POST('email');
+if(isset($_POST['save'])){
+  $name=$_POST['name'];
+  $number=$_POST['number'];
+  $address=$_POST['address'];
+  $email=$_POST['email'];
+
+  $sql="insert into`userdb`(name,number,address,email)values('$name','$number','$address','$email')";
+
+  $result=mysqli_query($conn,$sql);
+
+  if($result){
+    echo 'connection insert successfully';
+
+  }else{
+    die(mysqli_error($conn));
+  }
+
+};
 
 
-//
-$sql= "insert into userdb(name,number,address,email)values('$name','$number','$address','$email')";
-
-
-if(mysqli_query($connection,$sql))
-{
-    echo'<script> location.replace("index.php")</script>';
-}
-else{
-echo'some thing error'.$connection->error;
-}
-}
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,13 +39,14 @@ echo'some thing error'.$connection->error;
     <title>Document</title>
   </head>
   <body>
+
     <div class="container">
       <div class="row">
         <div class="card">
           <div class="card-header">Featured</div>
 
           <div class="card-body">
-          <form  action="add.php" method="post">
+          <form  action="add.php" method="POST">
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Name</label>
     <input type="text" class="form-control"  aria-describedby="emailHelp" name="name">
@@ -72,7 +69,7 @@ echo'some thing error'.$connection->error;
   </div>
 
 
-  <button type="submit" class="btn btn-primary" value="Regsiter">Submit</button>
+  <button type="submit" class="btn btn-primary" value="save" name="save">Submit</button>
 </form>
             
           </div>
