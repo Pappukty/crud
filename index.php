@@ -1,3 +1,9 @@
+
+
+
+<?php
+include('config.php');
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -27,12 +33,37 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">First</th>
-                  <th scope="col">Last</th>
-                  <th scope="col">Handle</th>
+                  <th scope="col">username</th>
+                  <th scope="col">number</th>
+                  <th scope="col">address</th>
+                  <th scope="col">email</th>
                 </tr>
               </thead>
-              <tbody></tbody>
+              <tbody>
+                <?php
+                $sql="SELECT *FROM userdb";
+                $result =mysqli_query($conn,$sql);
+                if($result){
+                while($row=mysqli_fetch_assoc($result)){
+ $id=$row['id'];
+ $username=$row['username'];
+$number=$row['number'];
+$address=$row['address'];
+$email=$row['email'];
+echo '<tr>
+<th scope="col">'.$id.'</th>
+<th scope="col">'.$username.'</th>
+<th scope="col">'.$number.'</th>
+<th scope="col">'.$address.'</th>
+<th scope="col">'.$email.'</th>
+<th><button class="btn btn-primary"><a  href="update.php?updateid='.$id.'" class="text-light">update</a></button></th>
+<th><button class="btn btn-danger text-light"><a href="delete.php?deleteid='.$id.'" class="text-light">delete</a></button></th>
+</tr>';
+}
+}
+?>
+             <a ></a>
+              </tbody>
             </table>
             <a href="#" class="btn btn-primary">Go somewhere</a>
           </div>
@@ -41,3 +72,4 @@
     </div>
   </body>
 </html>
+

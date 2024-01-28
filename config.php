@@ -1,15 +1,16 @@
 <?php
- 
+ $servername = "localhost";
+ $username = "root";
+ $password = "";
+ $database="crud";
 
-$conn=new mysqli('localhost','root','');
+$conn=new mysqli($servername,$username,$password,$database);
 
-$db=mysqli_select_db($conn,'crud');
+if($conn->connect_error){
+  die('connection not working'.$conn->connect_error);
 
-if($conn){
-  echo "connection successfully";
-}
-else{
-  die (mysqli_error($conn));
+}else{
+  echo 'connection successfully';
 }
 
 ?>
